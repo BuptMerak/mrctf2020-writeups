@@ -25,7 +25,7 @@
 # <span id="head1"> PWN</span>
 ## <span id="head2"> easyoverflow</span>
 简单栈溢出exp.py
-```
+```python
 #coding:utf8
 from pwn import *
 
@@ -42,7 +42,7 @@ sh.interactive()
 ```
 ## <span id="head3"> shellcode</span>
 直接用pwntools自带的shellcode
-```
+```python
 #coding:utf8
 from pwn import *
 
@@ -54,7 +54,7 @@ sh.interactive()
 ```
 ## <span id="head4"> Easy_equation</span>
 直接覆盖返回地址
-```
+```python
 #coding:utf8
 from pwn import *
 
@@ -69,7 +69,7 @@ sh.interactive()
 ```
 ## <span id="head5">shellcode Revenge</span>
 限制字符范围为ascii可见字符，我们可以用谷歌的ALPHA3工具加密shellcode为存ascii字符shellcode即可。
-```
+```python
 #coding:utf8
 from pwn import *
 
@@ -84,7 +84,7 @@ sh.interactive()
 ```
 ## <span id="head6"> nothing_but_everything</span>
 去掉了符号，我们可以写一个简易的程序静态编译后与该二进制进行对比，推断出某些函数的地址。我们找到_dl_make_stack_executable函数后，调用它，让栈变得可执行，然后jmp rsp执行shellcode。
-```
+```python
 #coding:utf8
 from pwn import *
 
@@ -118,7 +118,7 @@ sh.interactive()
 # <span id="head7"> web</span>
 ## <span id="head8"> ez_bypass</span>
 利用数组类型，使得md5返回null，绕过。ez_bypass.py
-```
+```python
 #coding:utf-8
 import urllib  
 import urllib2
@@ -137,7 +137,7 @@ print a
 ```
 # <span id="head9"> RE</span>
 ## <span id="head10"> Transform</span>
-```
+```c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -165,7 +165,7 @@ int main() {
 }
 ```
 ## <span id="head11"> 撸啊撸</span>
-```
+```c++
 #include <iostream>
 
 using namespace std;
@@ -192,7 +192,7 @@ int main() {
 直接用IDA打开，执行golang_loader_assist.py脚本，即可恢复符号，然后可以再查看一下主函数，可以发现flag。
 ##Junk
 逆向出逻辑如下
-```
+```c++
 #include <iostream>
 #include <cstring>
 
@@ -239,7 +239,7 @@ int main() {
 }
 ```
 写出逆向算法
-```
+```c++
 #include <iostream>
 #include <cstring>
 #include <stdint.h>
@@ -319,7 +319,7 @@ ok:
 ```
 ## <span id="head14"> Hard-to-go</span>
 还是先用golang_loader_assist.py脚本恢复符号，然后分析，发现是rc4加密，写出逆向算法。
-```
+```python
 from Crypto.Cipher import ARC4
 
 
@@ -334,7 +334,7 @@ print decodeRC4(data,'MRCTF_GOGOGO')
 ## <span id="head15"> Shit</span>
 用IDA调试时发现一直运行，后来把initterm给nop掉，可以调试了，写好逆向算法后发现结果不对。原来key值跟是否调试有关，发现ollydbg可以直接调试，不会被检测到，于是利用ollydbg，获得key的数据，然后写出逆向算法。
 加密逻辑
-```
+```c++
 #include <iostream>
 
 using namespace std;
@@ -409,7 +409,7 @@ int main() {
 }
 ```
 写出逆向算法
-```
+```c++
 #include <iostream>
 #include <cmath>
 
@@ -455,7 +455,7 @@ int main() {
 }
 ```
 ## <span id="head16"> EasyCpp</span>
-```
+```c++
 #include <iostream>
 #include <cmath>
 #include <cstring>
@@ -547,7 +547,7 @@ int main() {
 # <span id="head20"> Misc</span>
 ## <span id="head21"> 千层套路</span>
 套了1千个压缩包，用python解压
-```
+```python
 import zipfile
 import sys
 
@@ -566,7 +566,7 @@ def extractA(path):
 extractA('0573.zip')
 ```
 得到一个txt文件，里面是rgb值，画成图片
-```
+```python
 import re
 from PIL import Image
 
