@@ -679,6 +679,13 @@ if($_SERVER['REMOTE_ADDR']==="127.0.0.1"){
 
 用payload打一次刷新下页面var_dump()就会dumpflag出来了
 
+### Not So Web Application
+
+首先是题目说明，这玩意本来没这么恶心（没伪装加上 User 和 SQL 那个 SVG）  
+本题主要难点在于 Web Assembly 至今没有个能用的调试器，所以需要多种手段动调+静态调试。
+可以先通过和其他 Qt for Web Assembly 程序比对，去掉一大半疑似函数，同时可以通过搜索字符串（Incorrect等）确定大概相关函数位置。
+同时通过给输入框塞入大量垃圾（>64KB，wasm基本内存单位）触发内存越界错误找到变量存储位置。最终在浏览器里动调和 wasm2c 的辅助可以找到flag加密后内容和比对算法。
+
 ## RE
 
 ### Xor(校内专供)
